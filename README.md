@@ -1,4 +1,4 @@
-# atividade02-docker
+# Atividade02-docker
 
 ## Para iniciar o projeto
 ```bash
