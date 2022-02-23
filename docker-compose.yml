@@ -1,0 +1,35 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=projeto
+    ports:
+      - "5432:5432"
+    container_name: projeto
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - atividade02
+  back:
+    build: ./atividade02-back
+    environment:
+      - HOST_URL=jdbc:postgresql://db:5432/projeto
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "db"
+    networks:
+      - atividade02
+  web:
+    build: ./atividade02-front
+    ports:
+      - "3000:3000"
+    networks:
+      - atividade02
+volumes:
+  db-data:
+networks:
+  atividade02:
